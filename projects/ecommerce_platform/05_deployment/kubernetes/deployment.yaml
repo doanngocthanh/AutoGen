@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerce-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ecommerce-backend
+  template:
+    metadata:
+      labels:
+        app: ecommerce-backend
+    spec:
+      containers:
+        - name: ecommerce-backend
+          image: <DOCKERHUB_USERNAME>/ecommerce-backend:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: DB_HOST
+              value: ecommerce-db-service
+            - name: DB_NAME
+              value: ecommerce
+            - name: DB_USER
+              value: postgres
+            - name: DB_PASS
+              value: password
+            - name: DB_PORT
+              value: "5432"
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerce-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ecommerce-frontend
+  template:
+    metadata:
+      labels:
+        app: ecommerce-frontend
+    spec:
+      containers:
+        - name: ecommerce-frontend
+          image: <DOCKERHUB_USERNAME>/ecommerce-frontend:latest
+          ports:
+            - containerPort: 80

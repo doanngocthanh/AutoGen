@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommerce-backend-service
+spec:
+  selector:
+    app: ecommerce-backend
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommerce-frontend-service
+spec:
+  selector:
+    app: ecommerce-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer

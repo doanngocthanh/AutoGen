@@ -1,0 +1,637 @@
+{
+  "files": {
+    "project_context.json": {
+      "type": "json",
+      "size": 84257,
+      "modified": "2025-06-05T13:28:14.474556",
+      "content_preview": "[File too large: 84257 bytes]"
+    },
+    "rag_index.json": {
+      "type": "json",
+      "size": 49741,
+      "modified": "2025-06-05T13:27:43.625697",
+      "content_preview": "{\n  \"files\": {\n    \"project_context.json\": {\n      \"type\": \"json\",\n      \"size\": 2237,\n      \"modified\": \"2025-06-05T13:26:01.309457\",\n      \"content_preview\": \"{\\n  \\\"project_name\\\": \\\"ecommerce_platform\\\",\\n  \\\"requirements\\\": {\\n    \\\"requirements\\\": [\\n      \\\"Product and category management\\\",\\n      \\\"Shopping cart and checkout\\\",\\n      \\\"Order management\\\",\\n      \\\"User authentication and authorization\\\",\\n      \\\"Admin dashboard\\\",\\n      \\\"API for mobile app\\\",\\n      \\\"VNPay and Momo"
+    },
+    "01_requirements\\requirements_20250605_132559.json": {
+      "type": "json",
+      "size": 1004,
+      "modified": "2025-06-05T13:25:59.456815",
+      "content_preview": "{\n  \"requirements\": [\n    \"Product and category management\",\n    \"Shopping cart and checkout\",\n    \"Order management\",\n    \"User authentication and authorization\",\n    \"Admin dashboard\",\n    \"API for mobile app\",\n    \"VNPay and Momo payment integration\",\n    \"Multi-language support (Vietnamese, English)\"\n  ],\n  \"user_stories\": [\n    \"As a user, I want to browse products by category.\",\n    \"As a user, I want to add products to my shopping cart.\",\n    \"As a user, I want to checkout and pay using V"
+    },
+    "02_architecture\\architecture_20250605_132601.json": {
+      "type": "json",
+      "size": 905,
+      "modified": "2025-06-05T13:26:01.305889",
+      "content_preview": "{\n  \"architecture_type\": \"microservices\",\n  \"tech_stack\": {\n    \"backend\": \"Node.js with Express.js\",\n    \"frontend\": \"React\",\n    \"database\": \"PostgreSQL\"\n  },\n  \"database_schema\": \"Products (id, name, description, category_id, price, image_url), Categories (id, name, description), Users (id, username, password, email), Orders (id, user_id, order_date, total_amount, status), OrderItems (id, order_id, product_id, quantity, price), ShoppingCarts (id, user_id), CartItems (id, cart_id, product_id, "
+    },
+    "03_code\\code_20250605_132742.json": {
+      "type": "json",
+      "size": 65219,
+      "modified": "2025-06-05T13:27:42.826209",
+      "content_preview": "[File too large: 65219 bytes]"
+    },
+    "04_tests\\review_20250605_132801.json": {
+      "type": "json",
+      "size": 10116,
+      "modified": "2025-06-05T13:28:01.850253",
+      "content_preview": "{\n  \"code_quality_score\": 80,\n  \"issues\": [\n    \"Lack of comprehensive test coverage for all modules.\",\n    \"Missing input validation in some API endpoints.\",\n    \"Inconsistent error handling across different modules.\"\n  ],\n  \"suggestions\": [\n    \"Implement unit tests for all controllers, models, and services.\",\n    \"Add integration tests to verify the interaction between different modules.\",\n    \"Implement end-to-end tests to simulate user workflows.\",\n    \"Add input validation to all API endpo"
+    },
+    "04_tests\\test_admin_dashboard.py": {
+      "type": "python",
+      "size": 608,
+      "modified": "2025-06-05T13:28:01.952570",
+      "content_preview": "import unittest\nimport requests\nimport json\n\nBASE_URL = 'http://localhost:5000/api/admin'\n\nclass TestAdminDashboardAPI(unittest.TestCase):\n\n    def test_admin_login(self):\n        url = f'{BASE_URL}/login'\n        headers = {'Content-Type': 'application/json'}\n        payload = {\n            'username': 'admin',\n            'password': 'password'\n        }\n        response = requests.post(url, headers=headers, data=json.dumps(payload))\n        self.assertEqual(response.status_code, 200)\n        "
+    },
+    "04_tests\\test_api.py": {
+      "type": "python",
+      "size": 3817,
+      "modified": "2025-06-05T13:28:01.892372",
+      "content_preview": "import unittest\nimport requests\nimport json\n\nBASE_URL = 'http://localhost:5000'\n\nclass TestProductAPI(unittest.TestCase):\n\n    def test_create_product(self):\n        url = f'{BASE_URL}/products'\n        headers = {'Content-Type': 'application/json'}\n        payload = {\n            'name': 'Test Product',\n            'description': 'Test Description',\n            'category_id': 1,\n            'price': 99.99,\n            'image_url': 'http://example.com/image.jpg'\n        }\n        response = requ"
+    },
+    "04_tests\\test_auth.py": {
+      "type": "python",
+      "size": 2062,
+      "modified": "2025-06-05T13:28:01.945888",
+      "content_preview": "import unittest\nimport requests\nimport json\n\nBASE_URL = 'http://localhost:5000/api/auth'\n\nclass TestAuthAPI(unittest.TestCase):\n\n    def test_register_user(self):\n        url = f'{BASE_URL}/register'\n        headers = {'Content-Type': 'application/json'}\n        payload = {\n            'username': 'testuser',\n            'email': 'testuser@example.com',\n            'password': 'password123'\n        }\n        response = requests.post(url, headers=headers, data=json.dumps(payload))\n        self.as"
+    },
+    "04_tests\\test_payment.py": {
+      "type": "python",
+      "size": 1155,
+      "modified": "2025-06-05T13:28:01.948907",
+      "content_preview": "import unittest\nimport requests\nimport json\nimport os\n\nBASE_URL = 'http://localhost:5000/payment'\n\nclass TestPaymentAPI(unittest.TestCase):\n\n    def test_create_vnpay_payment(self):\n        url = f'{BASE_URL}/vnpay/create_payment'\n        headers = {'Content-Type': 'application/json'}\n        payload = {\n            'amount': 100,\n            'orderId': 'ORDER123'\n        }\n        response = requests.post(url, headers=headers, data=json.dumps(payload))\n        self.assertEqual(response.status_c"
+    },
+    "04_tests\\test_ui.js": {
+      "type": "javascript",
+      "size": 1411,
+      "modified": "2025-06-05T13:28:01.941844",
+      "content_preview": "// test_ui.js\n\nconst { chromium } = require('playwright');\n\n(async () => {\n  // Launch browser\n  const browser = await chromium.launch();\n  const page = await browser.newPage();\n\n  // Navigate to the product list page\n  await page.goto('http://localhost:3000/products');\n\n  // Check if the product list is displayed\n  const productListTitle = await page.textContent('h2');\n  expect(productListTitle).toBe('Product List');\n\n  // Check if at least one product is displayed\n  const productItems = await "
+    },
+    "05_deployment\\deployment_20250605_132814.json": {
+      "type": "json",
+      "size": 6066,
+      "modified": "2025-06-05T13:28:14.425284",
+      "content_preview": "{\n  \"docker_files\": {\n    \"Dockerfile_backend\": \"FROM node:18-alpine AS builder\\n\\nWORKDIR /app\\n\\nCOPY package*.json ./\\nRUN npm install\\nCOPY . ./\\n\\nRUN npm run build\\n\\nFROM node:18-alpine\\n\\nWORKDIR /app\\n\\nCOPY --from=builder /app ./\\n\\nEXPOSE 5000\\n\\nCMD [\\\"npm\\\", \\\"start\\\"]\",\n    \"Dockerfile_frontend\": \"FROM node:18-alpine AS builder\\n\\nWORKDIR /app\\n\\nCOPY package*.json ./\\nRUN npm install\\nCOPY . ./\\n\\nRUN npm run build\\n\\nFROM nginx:alpine\\n\\nCOPY --from=builder /app/build /usr/share/"
+    },
+    "03_code\\User Authentication\\package.json": {
+      "type": "json",
+      "size": 599,
+      "modified": "2025-06-05T13:27:42.997435",
+      "content_preview": "{\n  \"name\": \"ecommerce_platform\",\n  \"version\": \"1.0.0\",\n  \"description\": \"E-commerce platform with Node.js, Express.js, React, and PostgreSQL\",\n  \"main\": \"src/main.js\",\n  \"scripts\": {\n    \"start\": \"node src/main.js\",\n    \"dev\": \"nodemon src/main.js\"\n  },\n  \"dependencies\": {\n    \"bcrypt\": \"^5.0.1\",\n    \"express\": \"^4.17.1\",\n    \"express-validator\": \"^6.12.0\",\n    \"jsonwebtoken\": \"^8.5.1\",\n    \"mongoose\": \"^6.0.5\",\n    \"passport\": \"^0.6.0\",\n    \"passport-jwt\": \"^4.0.0\",\n    \"axios\": \"^0.21.4\",\n   "
+    },
+    "03_code\\Admin Dashboard\\admin_dashboard\\package.json": {
+      "type": "json",
+      "size": 1107,
+      "modified": "2025-06-05T13:27:43.160878",
+      "content_preview": "{\n  \"name\": \"admin-dashboard\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"dependencies\": {\n    \"@emotion/react\": \"^11.11.1\",\n    \"@emotion/styled\": \"^11.11.0\",\n    \"@mui/icons-material\": \"^5.14.3\",\n    \"@mui/material\": \"^5.14.3\",\n    \"@testing-library/jest-dom\": \"^5.16.5\",\n    \"@testing-library/react\": \"^13.4.0\",\n    \"@testing-library/user-event\": \"^13.5.0\",\n    \"axios\": \"^1.4.0\",\n    \"react\": \"^18.2.0\",\n    \"react-dom\": \"^18.2.0\",\n    \"react-router-dom\": \"^6.14.2\",\n    \"react-scripts\": \"5.0.1\""
+    },
+    "03_code\\Admin Dashboard\\admin_dashboard\\src\\App.js": {
+      "type": "javascript",
+      "size": 890,
+      "modified": "2025-06-05T13:27:43.172009",
+      "content_preview": "import React from 'react';\nimport { Routes, Route } from 'react-router-dom';\nimport Dashboard from './pages/Dashboard';\nimport Products from './pages/Products';\nimport Orders from './pages/Orders';\nimport Users from './pages/Users';\nimport Login from './pages/Login';\nimport { AuthProvider } from './AuthContext';\nimport PrivateRoute from './PrivateRoute';\n\nfunction App() {\n  return (\n    <AuthProvider>\n      <Routes>\n        <Route path=\"/login\" element={<Login />} />\n        <Route path=\"/\" elem"
+    },
+    "03_code\\Admin Dashboard\\admin_dashboard\\src\\AuthContext.js": {
+      "type": "javascript",
+      "size": 594,
+      "modified": "2025-06-05T13:27:43.176014",
+      "content_preview": "import React, { createContext, useState, useContext } from 'react';\n\nconst AuthContext = createContext();\n\nexport const AuthProvider = ({ children }) => {\n  const [authTokens, setAuthTokens] = useState(localStorage.getItem('tokens') || null);\n\n  const setTokens = (data) => {\n    localStorage.setItem('tokens', JSON.stringify(data));\n    setAuthTokens(data);\n  };\n\n  return (\n    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>\n      {children}\n    </AuthContext.Provider>\n  )"
+    },
+    "03_code\\Admin Dashboard\\admin_dashboard\\src\\index.js": {
+      "type": "javascript",
+      "size": 646,
+      "modified": "2025-06-05T13:27:43.166437",
+      "content_preview": "import React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport './index.css';\nimport App from './App';\nimport reportWebVitals from './reportWebVitals';\nimport { BrowserRouter } from 'react-router-dom';\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(\n  <React.StrictMode>\n    <BrowserRouter>\n      <App />\n    </BrowserRouter>\n  </React.StrictMode>\n);\n\n// If you want to start measuring performance in your app, pass a function\n// to log results (for examp"
+    },
+    "03_code\\Admin Dashboard\\admin_dashboard\\src\\PrivateRoute.js": {
+      "type": "javascript",
+      "size": 296,
+      "modified": "2025-06-05T13:27:43.177467",
+      "content_preview": "import React from 'react';\nimport { Route, Navigate } from 'react-router-dom';\nimport { useAuth } from './AuthContext';\n\nfunction PrivateRoute({ children }) {\n  const { authTokens } = useAuth();\n\n  return authTokens ? children : <Navigate to=\"/login\" />;\n}\n\nexport default PrivateRoute;"
+    },
+    "03_code\\Admin Dashboard\\admin_dashboard\\src\\pages\\Dashboard.js": {
+      "type": "javascript",
+      "size": 447,
+      "modified": "2025-06-05T13:27:43.182924",
+      "content_preview": "import React from 'react';\nimport { Typography, Container } from '@mui/material';\n\nfunction Dashboard() {\n  return (\n    <Container>\n      <Typography variant=\"h4\" component=\"h1\" gutterBottom>\n        Admin Dashboard\n      </Typography>\n      <Typography variant=\"body1\">\n        Welcome to the admin dashboard. You can manage products, orders, and users here.\n      </Typography>\n    </Container>\n  );\n}\n\nexport default Dashboard;"
+    },
+    "03_code\\Admin Dashboard\\admin_dashboard\\src\\pages\\Login.js": {
+      "type": "javascript",
+      "size": 2332,
+      "modified": "2025-06-05T13:27:43.196105",
+      "content_preview": "import React, { useState } from 'react';\nimport { useNavigate } from 'react-router-dom';\nimport { TextField, Button, Container, Typography, Box } from '@mui/material';\nimport axios from 'axios';\nimport { useAuth } from '../AuthContext';\n\nfunction Login() {\n  const [username, setUsername] = useState('');\n  const [password, setPassword] = useState('');\n  const navigate = useNavigate();\n  const { setAuthTokens } = useAuth();\n\n  const handleSubmit = async (event) => {\n    event.preventDefault();\n   "
+    },
+    "03_code\\Admin Dashboard\\admin_dashboard\\src\\pages\\Orders.js": {
+      "type": "javascript",
+      "size": 376,
+      "modified": "2025-06-05T13:27:43.190591",
+      "content_preview": "import React from 'react';\nimport { Typography, Container } from '@mui/material';\n\nfunction Orders() {\n  return (\n    <Container>\n      <Typography variant=\"h4\" component=\"h1\" gutterBottom>\n        Orders\n      </Typography>\n      <Typography variant=\"body1\">\n        Manage your orders here.\n      </Typography>\n    </Container>\n  );\n}\n\nexport default Orders;"
+    },
+    "03_code\\Admin Dashboard\\admin_dashboard\\src\\pages\\Products.js": {
+      "type": "javascript",
+      "size": 384,
+      "modified": "2025-06-05T13:27:43.187136",
+      "content_preview": "import React from 'react';\nimport { Typography, Container } from '@mui/material';\n\nfunction Products() {\n  return (\n    <Container>\n      <Typography variant=\"h4\" component=\"h1\" gutterBottom>\n        Products\n      </Typography>\n      <Typography variant=\"body1\">\n        Manage your products here.\n      </Typography>\n    </Container>\n  );\n}\n\nexport default Products;"
+    },
+    "03_code\\Admin Dashboard\\admin_dashboard\\src\\pages\\Users.js": {
+      "type": "javascript",
+      "size": 372,
+      "modified": "2025-06-05T13:27:43.193078",
+      "content_preview": "import React from 'react';\nimport { Typography, Container } from '@mui/material';\n\nfunction Users() {\n  return (\n    <Container>\n      <Typography variant=\"h4\" component=\"h1\" gutterBottom>\n        Users\n      </Typography>\n      <Typography variant=\"body1\">\n        Manage your users here.\n      </Typography>\n    </Container>\n  );\n}\n\nexport default Users;"
+    },
+    "03_code\\Category Management\\backend\\config\\database.js": {
+      "type": "javascript",
+      "size": 804,
+      "modified": "2025-06-05T13:27:42.902543",
+      "content_preview": "const { Sequelize } = require('sequelize');\nrequire('dotenv').config();\n\nconst sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {\n  host: process.env.DB_HOST,\n  dialect: 'postgres',\n  port: process.env.DB_PORT,\n  dialectOptions: {\n    ssl: process.env.DB_SSL === 'true' ? {require: true, rejectUnauthorized: false} : false\n  },\n  logging: false\n});\n\nconst testDatabaseConnection = async () => {\n  try {\n    await sequelize.authenticate();\n    console.log('Conn"
+    },
+    "03_code\\Category Management\\backend\\modules\\category\\controllers\\category.controller.js": {
+      "type": "javascript",
+      "size": 1797,
+      "modified": "2025-06-05T13:27:42.891686",
+      "content_preview": "const Category = require('../models/category.model');\n\n// Create a new category\nexports.create = async (req, res) => {\n  try {\n    const category = await Category.create(req.body);\n    res.status(201).json(category);\n  } catch (err) {\n    res.status(500).json({ message: err.message });\n  }\n};\n\n// Get all categories\nexports.findAll = async (req, res) => {\n  try {\n    const categories = await Category.findAll();\n    res.status(200).json(categories);\n  } catch (err) {\n    res.status(500).json({ mes"
+    },
+    "03_code\\Category Management\\backend\\modules\\category\\models\\category.model.js": {
+      "type": "javascript",
+      "size": 518,
+      "modified": "2025-06-05T13:27:42.881013",
+      "content_preview": "const { Sequelize, DataTypes } = require('sequelize');\nconst sequelize = require('../../../config/database');\n\nconst Category = sequelize.define('Category', {\n  id: {\n    type: DataTypes.INTEGER,\n    primaryKey: true,\n    autoIncrement: true,\n  },\n  name: {\n    type: DataTypes.STRING,\n    allowNull: false,\n  },\n  description: {\n    type: DataTypes.STRING,\n  },\n  image_url: {\n    type: DataTypes.STRING,\n  },\n}, {\n  tableName: 'Categories',\n  timestamps: true,\n});\n\nmodule.exports = Category;"
+    },
+    "03_code\\Category Management\\backend\\modules\\category\\routes\\category.routes.js": {
+      "type": "javascript",
+      "size": 552,
+      "modified": "2025-06-05T13:27:42.898010",
+      "content_preview": "const express = require('express');\nconst router = express.Router();\nconst categoryController = require('../controllers/category.controller');\n\n// Create a new category\nrouter.post('/', categoryController.create);\n\n// Get all categories\nrouter.get('/', categoryController.findAll);\n\n// Get a category by ID\nrouter.get('/:id', categoryController.findOne);\n\n// Update a category by ID\nrouter.put('/:id', categoryController.update);\n\n// Delete a category by ID\nrouter.delete('/:id', categoryController.d"
+    },
+    "03_code\\Category Management\\database\\migrations\\20250605140000-create-categories.js": {
+      "type": "javascript",
+      "size": 783,
+      "modified": "2025-06-05T13:27:42.924863",
+      "content_preview": "'use strict';\n\nmodule.exports = {\n  up: async (queryInterface, Sequelize) => {\n    await queryInterface.createTable('Categories', {\n      id: {\n        allowNull: false,\n        autoIncrement: true,\n        primaryKey: true,\n        type: Sequelize.INTEGER\n      },\n      name: {\n        type: Sequelize.STRING,\n        allowNull: false\n      },\n      description: {\n        type: Sequelize.STRING\n      },\n      image_url: {\n        type: Sequelize.STRING\n      },\n      createdAt: {\n        allowNu"
+    },
+    "03_code\\Category Management\\frontend\\src\\components\\category\\CategoryList.js": {
+      "type": "javascript",
+      "size": 867,
+      "modified": "2025-06-05T13:27:42.916819",
+      "content_preview": "import React, { useState, useEffect } from 'react';\n\nconst CategoryList = () => {\n  const [categories, setCategories] = useState([]);\n\n  useEffect(() => {\n    const fetchCategories = async () => {\n      try {\n        const response = await fetch('/api/categories'); // Assuming your backend route\n        if (!response.ok) {\n          throw new Error(`HTTP error! status: ${response.status}`);\n        }\n        const data = await response.json();\n        setCategories(data);\n      } catch (error) {"
+    },
+    "03_code\\Order Management\\src\\app.js": {
+      "type": "javascript",
+      "size": 610,
+      "modified": "2025-06-05T13:27:43.029912",
+      "content_preview": "const express = require('express');\nconst cors = require('cors');\nconst productRoutes = require('./product_management/routes/productRoutes');\nconst categoryRoutes = require('./category_management/routes/categoryRoutes');\nconst userRoutes = require('./user_authentication/routes/userRoutes');\nconst orderRoutes = require('./order_management/routes/orderRoutes');\n\nconst app = express();\n\napp.use(cors());\napp.use(express.json());\n\napp.use('/products', productRoutes);\napp.use('/categories', categoryRo"
+    },
+    "03_code\\Order Management\\backend\\order_management\\controllers\\orderController.js": {
+      "type": "javascript",
+      "size": 2437,
+      "modified": "2025-06-05T13:27:43.016737",
+      "content_preview": "const Order = require('../models/order');\nconst OrderItem = require('../models/orderItem');\n\nexports.getAllOrders = async (req, res) => {\n  try {\n    const orders = await Order.findAll();\n    res.status(200).json(orders);\n  } catch (error) {\n    console.error(error);\n    res.status(500).json({ message: 'Error fetching orders' });\n  }\n};\n\nexports.getOrderById = async (req, res) => {\n  const { id } = req.params;\n  try {\n    const order = await Order.findByPk(id, {\n      include: [OrderItem],\n    }"
+    },
+    "03_code\\Order Management\\backend\\order_management\\models\\order.js": {
+      "type": "javascript",
+      "size": 592,
+      "modified": "2025-06-05T13:27:42.999942",
+      "content_preview": "const { Sequelize, DataTypes } = require('sequelize');\nconst sequelize = require('../../../database/config/database');\n\nconst Order = sequelize.define('Order', {\n  id: {\n    type: DataTypes.INTEGER,\n    primaryKey: true,\n    autoIncrement: true,\n  },\n  user_id: {\n    type: DataTypes.INTEGER,\n    allowNull: false,\n  },\n  order_date: {\n    type: DataTypes.DATE,\n    allowNull: false,\n  },\n  total_amount: {\n    type: DataTypes.DECIMAL(10, 2),\n    allowNull: false,\n  },\n  status: {\n    type: DataType"
+    },
+    "03_code\\Order Management\\backend\\order_management\\models\\orderItem.js": {
+      "type": "javascript",
+      "size": 901,
+      "modified": "2025-06-05T13:27:43.011903",
+      "content_preview": "const { Sequelize, DataTypes } = require('sequelize');\nconst sequelize = require('../../../database/config/database');\nconst Order = require('./order');\nconst Product = require('../../product_management/models/product');\n\nconst OrderItem = sequelize.define('OrderItem', {\n  id: {\n    type: DataTypes.INTEGER,\n    primaryKey: true,\n    autoIncrement: true,\n  },\n  order_id: {\n    type: DataTypes.INTEGER,\n    allowNull: false,\n    references: {\n      model: Order,\n      key: 'id',\n    },\n  },\n  produ"
+    },
+    "03_code\\Order Management\\backend\\order_management\\routes\\orderRoutes.js": {
+      "type": "javascript",
+      "size": 417,
+      "modified": "2025-06-05T13:27:43.020841",
+      "content_preview": "const express = require('express');\nconst orderController = require('../controllers/orderController');\nconst router = express.Router();\n\nrouter.get('/', orderController.getAllOrders);\nrouter.get('/:id', orderController.getOrderById);\nrouter.post('/', orderController.createOrder);\nrouter.put('/:id', orderController.updateOrder);\nrouter.delete('/:id', orderController.deleteOrder);\n\nmodule.exports = router;"
+    },
+    "03_code\\Order Management\\database\\config\\database.js": {
+      "type": "javascript",
+      "size": 729,
+      "modified": "2025-06-05T13:27:43.038311",
+      "content_preview": "const { Sequelize } = require('sequelize');\nrequire('dotenv').config();\n\nconst sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {\n  host: process.env.DB_HOST,\n  dialect: 'postgres',\n  port: process.env.DB_PORT,\n  dialectOptions: {\n    ssl: {\n      require: true, // This will vary depending on your setup\n      rejectUnauthorized: false, // You might need this\n    },\n  },\n});\n\nconst testConnection = async () => {\n  try {\n    await sequelize.authenticate();\n "
+    },
+    "03_code\\Payment Integration\\backend\\payment\\config\\momo.config.js": {
+      "type": "javascript",
+      "size": 519,
+      "modified": "2025-06-05T13:27:43.055325",
+      "content_preview": "module.exports = {\n  partnerCode: process.env.MOMO_PARTNER_CODE || 'YOUR_MOMO_PARTNER_CODE',\n  accessKey: process.env.MOMO_ACCESS_KEY || 'YOUR_MOMO_ACCESS_KEY',\n  secretKey: process.env.MOMO_SECRET_KEY || 'YOUR_MOMO_SECRET_KEY',\n  returnUrl: process.env.MOMO_RETURN_URL || 'http://localhost:3000/payment/momo_return',\n  notifyUrl: process.env.MOMO_NOTIFY_URL || 'http://localhost:3000/payment/momo_ipn',\n  endpoint: process.env.MOMO_ENDPOINT || 'https://test-payment.momo.vn/gw_payment/transactionPro"
+    },
+    "03_code\\Payment Integration\\backend\\payment\\config\\vnpay.config.js": {
+      "type": "javascript",
+      "size": 494,
+      "modified": "2025-06-05T13:27:43.050306",
+      "content_preview": "module.exports = {\n  tmnCode: process.env.VNP_TMN_CODE || 'YOUR_VNPAY_TMN_CODE',\n  secretKey: process.env.VNP_SECRET_KEY || 'YOUR_VNPAY_SECRET_KEY',\n  returnUrl: process.env.VNP_RETURN_URL || 'http://localhost:3000/payment/vnpay_return',\n  apiUrl: process.env.VNP_API_URL || 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html',\n  ipnUrl: process.env.VNP_IPN_URL || 'http://localhost:3000/payment/vnpay_ipn',\n  version: '2.1.0',\n  command: 'pay',\n  currCode: 'VND',\n  locale: 'vn'\n};\n"
+    },
+    "03_code\\Payment Integration\\backend\\payment\\controllers\\payment.controller.js": {
+      "type": "javascript",
+      "size": 2234,
+      "modified": "2025-06-05T13:27:43.059316",
+      "content_preview": "const vnpayService = require('../services/vnpay.service');\nconst momoService = require('../services/momo.service');\nconst Payment = require('../models/payment.model');\n\nexports.createPaymentVNPay = async (req, res) => {\n  try {\n    const paymentData = req.body;\n    const url = await vnpayService.createPaymentUrl(paymentData);\n    res.json({ url });\n  } catch (error) {\n    console.error(error);\n    res.status(500).json({ message: 'Failed to create VNPay payment URL' });\n  }\n};\n\nexports.vnpayRetur"
+    },
+    "03_code\\Payment Integration\\backend\\payment\\models\\payment.model.js": {
+      "type": "javascript",
+      "size": 1034,
+      "modified": "2025-06-05T13:27:43.066428",
+      "content_preview": "const { Pool } = require('pg');\n\nconst pool = new Pool({\n  user: process.env.DB_USER || 'postgres',\n  host: process.env.DB_HOST || 'localhost',\n  database: process.env.DB_NAME || 'ecommerce',\n  password: process.env.DB_PASSWORD || 'password',\n  port: process.env.DB_PORT || 5432\n});\n\nclass Payment {\n  constructor(payment) {\n    this.transactionId = payment.transactionId;\n    this.paymentMethod = payment.paymentMethod;\n    this.amount = payment.amount;\n    this.status = payment.status;\n    this.de"
+    },
+    "03_code\\Payment Integration\\backend\\payment\\routes\\payment.routes.js": {
+      "type": "javascript",
+      "size": 559,
+      "modified": "2025-06-05T13:27:43.072643",
+      "content_preview": "const express = require('express');\nconst paymentController = require('../controllers/payment.controller');\n\nconst router = express.Router();\n\nrouter.post('/vnpay/create_payment', paymentController.createPaymentVNPay);\nrouter.get('/vnpay_return', paymentController.vnpayReturn);\nrouter.get('/vnpay_ipn', paymentController.vnpayIpn);\n\nrouter.post('/momo/create_payment', paymentController.createPaymentMomo);\nrouter.get('/momo_return', paymentController.momoReturn);\nrouter.post('/momo_ipn', paymentCo"
+    },
+    "03_code\\Payment Integration\\backend\\payment\\services\\momo.service.js": {
+      "type": "javascript",
+      "size": 1711,
+      "modified": "2025-06-05T13:27:43.083570",
+      "content_preview": "const axios = require('axios');\nconst momoConfig = require('../config/momo.config');\nconst crypto = require('crypto');\n\nexports.createPayment = async (paymentData) => {\n  try {\n    const orderId = paymentData.orderId;\n    const amount = paymentData.amount;\n    const orderInfo = paymentData.orderInfo || 'Payment for order';\n    const returnUrl = momoConfig.returnUrl;\n    const notifyUrl = momoConfig.notifyUrl;\n    const partnerCode = momoConfig.partnerCode;\n    const accessKey = momoConfig.access"
+    },
+    "03_code\\Payment Integration\\backend\\payment\\services\\vnpay.service.js": {
+      "type": "javascript",
+      "size": 3833,
+      "modified": "2025-06-05T13:27:43.078763",
+      "content_preview": "const querystring = require('qs');\nconst crypto = require('crypto');\nconst vnpayConfig = require('../config/vnpay.config');\n\nexports.createPaymentUrl = async (paymentData) => {\n  const createDate = new Date();\n  const ipAddr = paymentData.ipAddr || '127.0.0.1';\n\n  const tmnCode = vnpayConfig.tmnCode;\n  const secretKey = vnpayConfig.secretKey;\n  let vnpUrl = vnpayConfig.apiUrl;\n  const returnUrl = vnpayConfig.returnUrl;\n\n  const vnp_Params = {};\n  vnp_Params['vnp_Version'] = vnpayConfig.version;\n"
+    },
+    "03_code\\Payment Integration\\database\\migrations\\20250605140000_create_payments_table.js": {
+      "type": "javascript",
+      "size": 475,
+      "modified": "2025-06-05T13:27:43.103587",
+      "content_preview": "exports.up = function(knex) {\n  return knex.schema.createTable('Payments', (table) => {\n    table.increments('id').primary();\n    table.string('transaction_id').notNullable();\n    table.string('payment_method').notNullable();\n    table.decimal('amount').notNullable();\n    table.string('status').notNullable();\n    table.jsonb('details');\n    table.timestamps(true, true);\n  });\n};\n\nexports.down = function(knex) {\n  return knex.schema.dropTable('Payments');\n};"
+    },
+    "03_code\\Payment Integration\\frontend\\src\\services\\payment.js": {
+      "type": "javascript",
+      "size": 637,
+      "modified": "2025-06-05T13:27:43.097032",
+      "content_preview": "import axios from 'axios';\n\nconst API_URL = 'http://localhost:3000/payment'; // Replace with your backend API URL\n\nexport const createPaymentVNPay = async (paymentData) => {\n  try {\n    const response = await axios.post(`${API_URL}/vnpay/create_payment`, paymentData);\n    return response.data;\n  } catch (error) {\n    console.error(error);\n    throw error;\n  }\n};\n\nexport const createPaymentMomo = async (paymentData) => {\n  try {\n    const response = await axios.post(`${API_URL}/momo/create_paymen"
+    },
+    "03_code\\Payment Integration\\frontend\\src\\components\\payment\\PaymentForm.js": {
+      "type": "javascript",
+      "size": 1834,
+      "modified": "2025-06-05T13:27:43.091530",
+      "content_preview": "import React, { useState } from 'react';\nimport { createPaymentVNPay, createPaymentMomo } from '../../services/payment';\n\nconst PaymentForm = () => {\n  const [amount, setAmount] = useState('');\n  const [orderId, setOrderId] = useState('');\n  const [paymentUrl, setPaymentUrl] = useState('');\n\n  const handleVNPayPayment = async () => {\n    try {\n      const data = await createPaymentVNPay({ amount: parseFloat(amount), orderId: orderId });\n      setPaymentUrl(data.url);\n      window.location.href ="
+    },
+    "03_code\\Product Management\\backend\\config\\db.config.js": {
+      "type": "javascript",
+      "size": 92,
+      "modified": "2025-06-05T13:27:42.852081",
+      "content_preview": "module.exports = {\n    url: process.env.DB_URL || 'mongodb://localhost:27017/ecommerce'\n};"
+    },
+    "03_code\\Product Management\\backend\\modules\\product\\controllers\\product.controller.js": {
+      "type": "javascript",
+      "size": 2505,
+      "modified": "2025-06-05T13:27:42.826209",
+      "content_preview": "const Product = require('../models/product.model');\n\n// Create a new product\nexports.create = async (req, res) => {\n  try {\n    const product = new Product(req.body);\n    const savedProduct = await product.save();\n    res.status(201).send(savedProduct);\n  } catch (error) {\n    res.status(500).send({ message: error.message || 'Some error occurred while creating the Product.' });\n  }\n};\n\n// Retrieve all products\nexports.findAll = async (req, res) => {\n  try {\n    const products = await Product.fin"
+    },
+    "03_code\\Product Management\\backend\\modules\\product\\models\\product.model.js": {
+      "type": "javascript",
+      "size": 497,
+      "modified": "2025-06-05T13:27:42.841530",
+      "content_preview": "const mongoose = require('mongoose');\n\nconst ProductSchema = mongoose.Schema({\n  name: {\n    type: String,\n    required: true\n  },\n  description: {\n    type: String,\n    required: true\n  },\n  category_id: {\n    type: mongoose.Schema.Types.ObjectId,\n    ref: 'Category',\n    required: true\n  },\n  price: {\n    type: Number,\n    required: true\n  },\n  image_url: {\n    type: String\n  }\n}, {\n  timestamps: true\n});\n\nmodule.exports = mongoose.model('Product', ProductSchema);"
+    },
+    "03_code\\Product Management\\backend\\modules\\product\\routes\\product.routes.js": {
+      "type": "javascript",
+      "size": 529,
+      "modified": "2025-06-05T13:27:42.847529",
+      "content_preview": "const express = require('express');\nconst router = express.Router();\nconst products = require('../controllers/product.controller');\n\n// Create a new Product\nrouter.post('/', products.create);\n\n// Retrieve all Products\nrouter.get('/', products.findAll);\n\n// Retrieve a single Product with productId\nrouter.get('/:id', products.findOne);\n\n// Update a Product with productId\nrouter.put('/:id', products.update);\n\n// Delete a Product with productId\nrouter.delete('/:id', products.delete);\n\nmodule.exports"
+    },
+    "03_code\\Product Management\\database\\migrations\\20240101000001-create-products.js": {
+      "type": "javascript",
+      "size": 1133,
+      "modified": "2025-06-05T13:27:42.864311",
+      "content_preview": "'use strict';\nmodule.exports = {\n  up: async (queryInterface, Sequelize) => {\n    await queryInterface.createTable('Products', {\n      id: {\n        allowNull: false,\n        autoIncrement: true,\n        primaryKey: true,\n        type: Sequelize.INTEGER\n      },\n      name: {\n        type: Sequelize.STRING,\n        allowNull: false\n      },\n      description: {\n        type: Sequelize.TEXT,\n        allowNull: false\n      },\n      category_id: {\n        type: Sequelize.INTEGER,\n        allowNull:"
+    },
+    "03_code\\Product Management\\frontend\\src\\components\\Product\\ProductList.js": {
+      "type": "javascript",
+      "size": 791,
+      "modified": "2025-06-05T13:27:42.860803",
+      "content_preview": "import React, { useState, useEffect } from 'react';\n\nconst ProductList = () => {\n  const [products, setProducts] = useState([]);\n\n  useEffect(() => {\n    // Fetch products from API\n    const fetchProducts = async () => {\n      try {\n        const response = await fetch('/api/products'); // Replace with your API endpoint\n        const data = await response.json();\n        setProducts(data);\n      } catch (error) {\n        console.error('Error fetching products:', error);\n      }\n    };\n\n    fetch"
+    },
+    "03_code\\Shopping Cart\\backend\\src\\shopping_cart\\controllers\\cartController.js": {
+      "type": "javascript",
+      "size": 3814,
+      "modified": "2025-06-05T13:27:43.124112",
+      "content_preview": "const Cart = require('../models/cart');\nconst Product = require('../../product/models/product');\n\nexports.getCart = async (req, res) => {\n  try {\n    const userId = req.user.id; // Assuming user ID is available in req.user\n    const cart = await Cart.findOne({ user_id: userId }).populate('items.product_id');\n\n    if (!cart) {\n      return res.status(404).json({ message: 'Cart not found' });\n    }\n\n    res.status(200).json(cart);\n  } catch (error) {\n    console.error(error);\n    res.status(500).j"
+    },
+    "03_code\\Shopping Cart\\backend\\src\\shopping_cart\\models\\cart.js": {
+      "type": "javascript",
+      "size": 612,
+      "modified": "2025-06-05T13:27:43.113570",
+      "content_preview": "const mongoose = require('mongoose');\n\nconst cartSchema = new mongoose.Schema({\n  user_id: {\n    type: mongoose.Schema.Types.ObjectId,\n    ref: 'User',\n    required: true\n  },\n  items: [{\n    product_id: {\n      type: mongoose.Schema.Types.ObjectId,\n      ref: 'Product',\n      required: true\n    },\n    quantity: {\n      type: Number,\n      required: true,\n      min: 1\n    },\n    price: {\n        type: Number,\n        required: true\n    }\n  }],\n  total_amount: {\n    type: Number,\n    default: 0\n "
+    },
+    "03_code\\Shopping Cart\\backend\\src\\shopping_cart\\routes\\cartRoutes.js": {
+      "type": "javascript",
+      "size": 605,
+      "modified": "2025-06-05T13:27:43.130080",
+      "content_preview": "const express = require('express');\nconst router = express.Router();\nconst cartController = require('../controllers/cartController');\nconst { authenticateToken } = require('../../middleware/authMiddleware');\n\nrouter.get('/', authenticateToken, cartController.getCart);\nrouter.post('/items', authenticateToken, cartController.addItemToCart);\nrouter.put('/items', authenticateToken, cartController.updateCartItem);\nrouter.delete('/items/:product_id', authenticateToken, cartController.removeItemFromCar"
+    },
+    "03_code\\Shopping Cart\\database\\migrations\\20250605140000-create-shopping-carts.js": {
+      "type": "javascript",
+      "size": 808,
+      "modified": "2025-06-05T13:27:43.151780",
+      "content_preview": "'use strict';\nmodule.exports = {\n  up: async (queryInterface, Sequelize) => {\n    await queryInterface.createTable('ShoppingCarts', {\n      id: {\n        allowNull: false,\n        autoIncrement: true,\n        primaryKey: true,\n        type: Sequelize.INTEGER\n      },\n      user_id: {\n        type: Sequelize.INTEGER,\n        allowNull: false,\n        references: {\n          model: 'Users',\n          key: 'id'\n        },\n        onUpdate: 'CASCADE',\n        onDelete: 'CASCADE'\n      },\n      creat"
+    },
+    "03_code\\Shopping Cart\\database\\migrations\\20250605140001-create-cart-items.js": {
+      "type": "javascript",
+      "size": 1251,
+      "modified": "2025-06-05T13:27:43.155398",
+      "content_preview": "'use strict';\nmodule.exports = {\n  up: async (queryInterface, Sequelize) => {\n    await queryInterface.createTable('CartItems', {\n      id: {\n        allowNull: false,\n        autoIncrement: true,\n        primaryKey: true,\n        type: Sequelize.INTEGER\n      },\n      cart_id: {\n        type: Sequelize.INTEGER,\n        allowNull: false,\n        references: {\n          model: 'ShoppingCarts',\n          key: 'id'\n        },\n        onUpdate: 'CASCADE',\n        onDelete: 'CASCADE'\n      },\n      p"
+    },
+    "03_code\\Shopping Cart\\frontend\\src\\components\\ShoppingCart\\ShoppingCart.js": {
+      "type": "javascript",
+      "size": 1312,
+      "modified": "2025-06-05T13:27:43.142080",
+      "content_preview": "import React, { useState, useEffect } from 'react';\nimport axios from 'axios';\n\nconst ShoppingCart = () => {\n  const [cart, setCart] = useState(null);\n  const [loading, setLoading] = useState(true);\n  const [error, setError] = useState(null);\n\n  useEffect(() => {\n    const fetchCart = async () => {\n      try {\n        const token = localStorage.getItem('token'); // Assuming token is stored in localStorage\n        const response = await axios.get('/api/shopping_cart', {\n          headers: { Autho"
+    },
+    "03_code\\User Authentication\\backend\\config\\config.js": {
+      "type": "javascript",
+      "size": 191,
+      "modified": "2025-06-05T13:27:42.962411",
+      "content_preview": "module.exports = {\n    port: process.env.PORT || 5000,\n    dbURI: process.env.MONGODB_URI || 'mongodb://localhost:27017/ecommerce',\n    jwtSecret: process.env.JWT_SECRET || 'secret',\n  };"
+    },
+    "03_code\\User Authentication\\backend\\middleware\\auth.js": {
+      "type": "javascript",
+      "size": 547,
+      "modified": "2025-06-05T13:27:42.970117",
+      "content_preview": "const jwt = require('jsonwebtoken');\nconst config = require('../config/config');\n\nmodule.exports = function (req, res, next) {\n  // Get token from header\n  const token = req.header('x-auth-token');\n\n  // Check if not token\n  if (!token) {\n    return res.status(401).json({ msg: 'No token, authorization denied' });\n  }\n\n  // Verify token\n  try {\n    const decoded = jwt.verify(token, config.jwtSecret);\n\n    req.user = decoded.user;\n    next();\n  } catch (err) {\n    res.status(401).json({ msg: 'Toke"
+    },
+    "03_code\\User Authentication\\backend\\modules\\user_authentication\\controllers\\authController.js": {
+      "type": "javascript",
+      "size": 2356,
+      "modified": "2025-06-05T13:27:42.938615",
+      "content_preview": "const bcrypt = require('bcrypt');\nconst jwt = require('jsonwebtoken');\nconst { validationResult } = require('express-validator');\nconst User = require('../models/User');\nconst config = require('../../../config/config');\n\nexports.register = async (req, res) => {\n  const errors = validationResult(req);\n  if (!errors.isEmpty()) {\n    return res.status(400).json({ errors: errors.array() });\n  }\n\n  const { username, email, password } = req.body;\n\n  try {\n    let user = await User.findOne({ email });\n"
+    },
+    "03_code\\User Authentication\\backend\\modules\\user_authentication\\models\\User.js": {
+      "type": "javascript",
+      "size": 399,
+      "modified": "2025-06-05T13:27:42.948499",
+      "content_preview": "const mongoose = require('mongoose');\n\nconst UserSchema = new mongoose.Schema({\n  username: {\n    type: String,\n    required: true,\n  },\n  email: {\n    type: String,\n    required: true,\n    unique: true,\n  },\n  password: {\n    type: String,\n    required: true,\n  },\n  date: {\n    type: Date,\n    default: Date.now,\n  },\n});\n\nmodule.exports = mongoose.model('user', UserSchema);"
+    },
+    "03_code\\User Authentication\\backend\\modules\\user_authentication\\routes\\auth.js": {
+      "type": "javascript",
+      "size": 829,
+      "modified": "2025-06-05T13:27:42.954693",
+      "content_preview": "const express = require('express');\nconst router = express.Router();\nconst { check } = require('express-validator');\nconst authController = require('../controllers/authController');\nconst auth = require('../../../middleware/auth');\n\nrouter.post(\n  '/register',\n  [\n    check('username', 'Username is required').not().isEmpty(),\n    check('email', 'Please include a valid email').isEmail(),\n    check(\n      'password',\n      'Please enter a password with 6 or more characters'\n    ).isLength({ min: 6"
+    },
+    "03_code\\User Authentication\\frontend\\src\\services\\authService.js": {
+      "type": "javascript",
+      "size": 755,
+      "modified": "2025-06-05T13:27:42.991529",
+      "content_preview": "import axios from 'axios';\n\nconst API_URL = '/api/auth';\n\nconst register = (username, email, password) => {\n  return axios.post(API_URL + '/register', {\n    username,\n    email,\n    password,\n  });\n};\n\nconst login = (email, password) => {\n  return axios\n    .post(API_URL + '/login', {\n      email,\n      password,\n    })\n    .then((response) => {\n      if (response.data.token) {\n        localStorage.setItem('user', JSON.stringify(response.data));\n      }\n\n      return response.data;\n    });\n};\n\nc"
+    },
+    "03_code\\User Authentication\\frontend\\src\\components\\auth\\Login.js": {
+      "type": "javascript",
+      "size": 1376,
+      "modified": "2025-06-05T13:27:42.981117",
+      "content_preview": "import React, { useState } from 'react';\nimport axios from 'axios';\n\nconst Login = () => {\n  const [formData, setFormData] = useState({\n    email: '',\n    password: '',\n  });\n\n  const { email, password } = formData;\n\n  const onChange = (e) =>\n    setFormData({ ...formData, [e.target.name]: e.target.value });\n\n  const onSubmit = async (e) => {\n    e.preventDefault();\n    try {\n      const config = {\n        headers: {\n          'Content-Type': 'application/json',\n        },\n      };\n\n      const "
+    },
+    "03_code\\User Authentication\\frontend\\src\\components\\auth\\Register.js": {
+      "type": "javascript",
+      "size": 2054,
+      "modified": "2025-06-05T13:27:42.985120",
+      "content_preview": "import React, { useState } from 'react';\nimport axios from 'axios';\n\nconst Register = () => {\n  const [formData, setFormData] = useState({\n    username: '',\n    email: '',\n    password: '',\n    password2: '',\n  });\n\n  const { username, email, password, password2 } = formData;\n\n  const onChange = (e) =>\n    setFormData({ ...formData, [e.target.name]: e.target.value });\n\n  const onSubmit = async (e) => {\n    e.preventDefault();\n    if (password !== password2) {\n      console.log('Passwords do not "
+    },
+    "05_deployment\\ci-cd\\.github_workflows_deploy.yml": {
+      "type": "yaml",
+      "size": 1559,
+      "modified": "2025-06-05T13:28:14.450589",
+      "content_preview": "name: Deploy to Kubernetes\n\non:\n  push:\n    branches:\n      - main\n\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v3\n\n      - name: Set up Docker Buildx\n        uses: docker/setup-buildx-action@v2\n\n      - name: Login to Docker Hub\n        uses: docker/login-action@v2\n        with:\n          username: ${{ secrets.DOCKERHUB_USERNAME }}\n          password: ${{ secrets.DOCKERHUB_TOKEN }}\n\n      - name: Build and push Docker images\n        id: build-and-push\n  "
+    },
+    "05_deployment\\docker\\docker-compose.yml": {
+      "type": "yaml",
+      "size": 882,
+      "modified": "2025-06-05T13:28:14.450589",
+      "content_preview": "version: \"3.8\"\nservices:\n  backend:\n    build:\n      context: .\n      dockerfile: Dockerfile_backend\n    ports:\n      - \"5000:5000\"\n    environment:\n      - DB_HOST=db\n      - DB_NAME=ecommerce\n      - DB_USER=postgres\n      - DB_PASS=password\n      - DB_PORT=5432\n    depends_on:\n      - db\n    networks:\n      - app-network\n\n  frontend:\n    build:\n      context: .\n      dockerfile: Dockerfile_frontend\n    ports:\n      - \"3000:80\"\n    depends_on:\n      - backend\n    networks:\n      - app-network\n"
+    },
+    "05_deployment\\docker\\Dockerfile_backend": {
+      "type": "unknown",
+      "size": 229,
+      "modified": "2025-06-05T13:28:14.444823",
+      "content_preview": "FROM node:18-alpine AS builder\n\nWORKDIR /app\n\nCOPY package*.json ./\nRUN npm install\nCOPY . ./\n\nRUN npm run build\n\nFROM node:18-alpine\n\nWORKDIR /app\n\nCOPY --from=builder /app ./\n\nEXPOSE 5000\n\nCMD [\"npm\", \"start\"]"
+    },
+    "05_deployment\\docker\\Dockerfile_frontend": {
+      "type": "unknown",
+      "size": 248,
+      "modified": "2025-06-05T13:28:14.448827",
+      "content_preview": "FROM node:18-alpine AS builder\n\nWORKDIR /app\n\nCOPY package*.json ./\nRUN npm install\nCOPY . ./\n\nRUN npm run build\n\nFROM nginx:alpine\n\nCOPY --from=builder /app/build /usr/share/nginx/html\n\nEXPOSE 80\n\nCMD [\"nginx\", \"-g\", \"daemon off;\"]"
+    },
+    "05_deployment\\kubernetes\\deployment.yaml": {
+      "type": "yaml",
+      "size": 1168,
+      "modified": "2025-06-05T13:28:14.458818",
+      "content_preview": "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: ecommerce-backend\nspec:\n  replicas: 2\n  selector:\n    matchLabels:\n      app: ecommerce-backend\n  template:\n    metadata:\n      labels:\n        app: ecommerce-backend\n    spec:\n      containers:\n        - name: ecommerce-backend\n          image: <DOCKERHUB_USERNAME>/ecommerce-backend:latest\n          ports:\n            - containerPort: 5000\n          env:\n            - name: DB_HOST\n              value: ecommerce-db-service\n            - nam"
+    },
+    "05_deployment\\kubernetes\\ingress.yaml": {
+      "type": "yaml",
+      "size": 424,
+      "modified": "2025-06-05T13:28:14.468554",
+      "content_preview": "apiVersion: networking.k8s.io/v1\nkind: Ingress\nmetadata:\n  name: ecommerce-ingress\n  annotations:\n    kubernetes.io/ingress.class: nginx\nspec:\n  rules:\n    - host: ecommerce.example.com\n      http:\n        paths:\n          - path: /\n            pathType: Prefix\n            backend:\n              service:\n                name: ecommerce-frontend-service\n                port:\n                  number: 80\n"
+    },
+    "05_deployment\\kubernetes\\service.yaml": {
+      "type": "yaml",
+      "size": 438,
+      "modified": "2025-06-05T13:28:14.465287",
+      "content_preview": "apiVersion: v1\nkind: Service\nmetadata:\n  name: ecommerce-backend-service\nspec:\n  selector:\n    app: ecommerce-backend\n  ports:\n    - protocol: TCP\n      port: 5000\n      targetPort: 5000\n  type: ClusterIP\n---\napiVersion: v1\nkind: Service\nmetadata:\n  name: ecommerce-frontend-service\nspec:\n  selector:\n    app: ecommerce-frontend\n  ports:\n    - protocol: TCP\n      port: 80\n      targetPort: 80\n  type: LoadBalancer"
+    }
+  },
+  "directories": [
+    "01_requirements",
+    "02_architecture",
+    "03_code",
+    "04_tests",
+    "05_deployment",
+    "logs",
+    "03_code\\Admin Dashboard",
+    "03_code\\Category Management",
+    "03_code\\Order Management",
+    "03_code\\Payment Integration",
+    "03_code\\Product Management",
+    "03_code\\Shopping Cart",
+    "03_code\\User Authentication",
+    "05_deployment\\ci-cd",
+    "05_deployment\\docker",
+    "05_deployment\\kubernetes",
+    "03_code\\Admin Dashboard\\admin_dashboard",
+    "03_code\\Category Management\\backend",
+    "03_code\\Category Management\\database",
+    "03_code\\Category Management\\frontend",
+    "03_code\\Order Management\\backend",
+    "03_code\\Order Management\\database",
+    "03_code\\Order Management\\src",
+    "03_code\\Payment Integration\\backend",
+    "03_code\\Payment Integration\\database",
+    "03_code\\Payment Integration\\frontend",
+    "03_code\\Product Management\\backend",
+    "03_code\\Product Management\\database",
+    "03_code\\Product Management\\frontend",
+    "03_code\\Shopping Cart\\backend",
+    "03_code\\Shopping Cart\\database",
+    "03_code\\Shopping Cart\\frontend",
+    "03_code\\User Authentication\\backend",
+    "03_code\\User Authentication\\frontend",
+    "03_code\\Admin Dashboard\\admin_dashboard\\src",
+    "03_code\\Admin Dashboard\\admin_dashboard\\src\\pages",
+    "03_code\\Category Management\\backend\\config",
+    "03_code\\Category Management\\backend\\modules",
+    "03_code\\Category Management\\database\\migrations",
+    "03_code\\Category Management\\frontend\\src",
+    "03_code\\Category Management\\backend\\modules\\category",
+    "03_code\\Category Management\\backend\\modules\\category\\controllers",
+    "03_code\\Category Management\\backend\\modules\\category\\models",
+    "03_code\\Category Management\\backend\\modules\\category\\routes",
+    "03_code\\Category Management\\frontend\\src\\components",
+    "03_code\\Category Management\\frontend\\src\\components\\category",
+    "03_code\\Order Management\\backend\\order_management",
+    "03_code\\Order Management\\database\\config",
+    "03_code\\Order Management\\backend\\order_management\\controllers",
+    "03_code\\Order Management\\backend\\order_management\\models",
+    "03_code\\Order Management\\backend\\order_management\\routes",
+    "03_code\\Payment Integration\\backend\\payment",
+    "03_code\\Payment Integration\\database\\migrations",
+    "03_code\\Payment Integration\\frontend\\src",
+    "03_code\\Payment Integration\\backend\\payment\\config",
+    "03_code\\Payment Integration\\backend\\payment\\controllers",
+    "03_code\\Payment Integration\\backend\\payment\\models",
+    "03_code\\Payment Integration\\backend\\payment\\routes",
+    "03_code\\Payment Integration\\backend\\payment\\services",
+    "03_code\\Payment Integration\\frontend\\src\\components",
+    "03_code\\Payment Integration\\frontend\\src\\services",
+    "03_code\\Payment Integration\\frontend\\src\\components\\payment",
+    "03_code\\Product Management\\backend\\config",
+    "03_code\\Product Management\\backend\\modules",
+    "03_code\\Product Management\\database\\migrations",
+    "03_code\\Product Management\\frontend\\src",
+    "03_code\\Product Management\\backend\\modules\\product",
+    "03_code\\Product Management\\backend\\modules\\product\\controllers",
+    "03_code\\Product Management\\backend\\modules\\product\\models",
+    "03_code\\Product Management\\backend\\modules\\product\\routes",
+    "03_code\\Product Management\\frontend\\src\\components",
+    "03_code\\Product Management\\frontend\\src\\components\\Product",
+    "03_code\\Shopping Cart\\backend\\src",
+    "03_code\\Shopping Cart\\database\\migrations",
+    "03_code\\Shopping Cart\\frontend\\src",
+    "03_code\\Shopping Cart\\backend\\src\\shopping_cart",
+    "03_code\\Shopping Cart\\backend\\src\\shopping_cart\\controllers",
+    "03_code\\Shopping Cart\\backend\\src\\shopping_cart\\models",
+    "03_code\\Shopping Cart\\backend\\src\\shopping_cart\\routes",
+    "03_code\\Shopping Cart\\frontend\\src\\components",
+    "03_code\\Shopping Cart\\frontend\\src\\components\\ShoppingCart",
+    "03_code\\User Authentication\\backend\\config",
+    "03_code\\User Authentication\\backend\\middleware",
+    "03_code\\User Authentication\\backend\\modules",
+    "03_code\\User Authentication\\frontend\\src",
+    "03_code\\User Authentication\\backend\\modules\\user_authentication",
+    "03_code\\User Authentication\\backend\\modules\\user_authentication\\controllers",
+    "03_code\\User Authentication\\backend\\modules\\user_authentication\\models",
+    "03_code\\User Authentication\\backend\\modules\\user_authentication\\routes",
+    "03_code\\User Authentication\\frontend\\src\\components",
+    "03_code\\User Authentication\\frontend\\src\\services",
+    "03_code\\User Authentication\\frontend\\src\\components\\auth"
+  ],
+  "modules": {
+    "01_requirements": [
+      "01_requirements\\requirements_20250605_132559.json"
+    ],
+    "02_architecture": [
+      "02_architecture\\architecture_20250605_132601.json"
+    ],
+    "code_20250605_132742.json": [
+      "03_code\\code_20250605_132742.json"
+    ],
+    "04_tests": [
+      "04_tests\\review_20250605_132801.json",
+      "04_tests\\test_admin_dashboard.py",
+      "04_tests\\test_api.py",
+      "04_tests\\test_auth.py",
+      "04_tests\\test_payment.py",
+      "04_tests\\test_ui.js"
+    ],
+    "05_deployment": [
+      "05_deployment\\deployment_20250605_132814.json",
+      "05_deployment\\ci-cd\\.github_workflows_deploy.yml",
+      "05_deployment\\docker\\docker-compose.yml",
+      "05_deployment\\docker\\Dockerfile_backend",
+      "05_deployment\\docker\\Dockerfile_frontend",
+      "05_deployment\\kubernetes\\deployment.yaml",
+      "05_deployment\\kubernetes\\ingress.yaml",
+      "05_deployment\\kubernetes\\service.yaml"
+    ],
+    "User Authentication": [
+      "03_code\\User Authentication\\package.json",
+      "03_code\\User Authentication\\backend\\config\\config.js",
+      "03_code\\User Authentication\\backend\\middleware\\auth.js",
+      "03_code\\User Authentication\\backend\\modules\\user_authentication\\controllers\\authController.js",
+      "03_code\\User Authentication\\backend\\modules\\user_authentication\\models\\User.js",
+      "03_code\\User Authentication\\backend\\modules\\user_authentication\\routes\\auth.js",
+      "03_code\\User Authentication\\frontend\\src\\services\\authService.js",
+      "03_code\\User Authentication\\frontend\\src\\components\\auth\\Login.js",
+      "03_code\\User Authentication\\frontend\\src\\components\\auth\\Register.js"
+    ],
+    "Admin Dashboard": [
+      "03_code\\Admin Dashboard\\admin_dashboard\\package.json",
+      "03_code\\Admin Dashboard\\admin_dashboard\\src\\App.js",
+      "03_code\\Admin Dashboard\\admin_dashboard\\src\\AuthContext.js",
+      "03_code\\Admin Dashboard\\admin_dashboard\\src\\index.js",
+      "03_code\\Admin Dashboard\\admin_dashboard\\src\\PrivateRoute.js",
+      "03_code\\Admin Dashboard\\admin_dashboard\\src\\pages\\Dashboard.js",
+      "03_code\\Admin Dashboard\\admin_dashboard\\src\\pages\\Login.js",
+      "03_code\\Admin Dashboard\\admin_dashboard\\src\\pages\\Orders.js",
+      "03_code\\Admin Dashboard\\admin_dashboard\\src\\pages\\Products.js",
+      "03_code\\Admin Dashboard\\admin_dashboard\\src\\pages\\Users.js"
+    ],
+    "Category Management": [
+      "03_code\\Category Management\\backend\\config\\database.js",
+      "03_code\\Category Management\\backend\\modules\\category\\controllers\\category.controller.js",
+      "03_code\\Category Management\\backend\\modules\\category\\models\\category.model.js",
+      "03_code\\Category Management\\backend\\modules\\category\\routes\\category.routes.js",
+      "03_code\\Category Management\\database\\migrations\\20250605140000-create-categories.js",
+      "03_code\\Category Management\\frontend\\src\\components\\category\\CategoryList.js"
+    ],
+    "Order Management": [
+      "03_code\\Order Management\\src\\app.js",
+      "03_code\\Order Management\\backend\\order_management\\controllers\\orderController.js",
+      "03_code\\Order Management\\backend\\order_management\\models\\order.js",
+      "03_code\\Order Management\\backend\\order_management\\models\\orderItem.js",
+      "03_code\\Order Management\\backend\\order_management\\routes\\orderRoutes.js",
+      "03_code\\Order Management\\database\\config\\database.js"
+    ],
+    "Payment Integration": [
+      "03_code\\Payment Integration\\backend\\payment\\config\\momo.config.js",
+      "03_code\\Payment Integration\\backend\\payment\\config\\vnpay.config.js",
+      "03_code\\Payment Integration\\backend\\payment\\controllers\\payment.controller.js",
+      "03_code\\Payment Integration\\backend\\payment\\models\\payment.model.js",
+      "03_code\\Payment Integration\\backend\\payment\\routes\\payment.routes.js",
+      "03_code\\Payment Integration\\backend\\payment\\services\\momo.service.js",
+      "03_code\\Payment Integration\\backend\\payment\\services\\vnpay.service.js",
+      "03_code\\Payment Integration\\database\\migrations\\20250605140000_create_payments_table.js",
+      "03_code\\Payment Integration\\frontend\\src\\services\\payment.js",
+      "03_code\\Payment Integration\\frontend\\src\\components\\payment\\PaymentForm.js"
+    ],
+    "Product Management": [
+      "03_code\\Product Management\\backend\\config\\db.config.js",
+      "03_code\\Product Management\\backend\\modules\\product\\controllers\\product.controller.js",
+      "03_code\\Product Management\\backend\\modules\\product\\models\\product.model.js",
+      "03_code\\Product Management\\backend\\modules\\product\\routes\\product.routes.js",
+      "03_code\\Product Management\\database\\migrations\\20240101000001-create-products.js",
+      "03_code\\Product Management\\frontend\\src\\components\\Product\\ProductList.js"
+    ],
+    "Shopping Cart": [
+      "03_code\\Shopping Cart\\backend\\src\\shopping_cart\\controllers\\cartController.js",
+      "03_code\\Shopping Cart\\backend\\src\\shopping_cart\\models\\cart.js",
+      "03_code\\Shopping Cart\\backend\\src\\shopping_cart\\routes\\cartRoutes.js",
+      "03_code\\Shopping Cart\\database\\migrations\\20250605140000-create-shopping-carts.js",
+      "03_code\\Shopping Cart\\database\\migrations\\20250605140001-create-cart-items.js",
+      "03_code\\Shopping Cart\\frontend\\src\\components\\ShoppingCart\\ShoppingCart.js"
+    ]
+  },
+  "summary": {
+    "total_files": 72,
+    "file_types": {
+      "json": 9,
+      "python": 4,
+      "javascript": 52,
+      "yaml": 5,
+      "unknown": 2
+    },
+    "last_scan": "2025-06-05T13:28:14.474555"
+  }
+}

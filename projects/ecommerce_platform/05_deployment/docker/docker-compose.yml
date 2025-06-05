@@ -1,0 +1,49 @@
+version: "3.8"
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=ecommerce
+      - DB_USER=postgres
+      - DB_PASS=password
+      - DB_PORT=5432
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  db:
+    image: postgres:13-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=ecommerce
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db_data:

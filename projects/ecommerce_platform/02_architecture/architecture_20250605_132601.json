@@ -1,0 +1,19 @@
+{
+  "architecture_type": "microservices",
+  "tech_stack": {
+    "backend": "Node.js with Express.js",
+    "frontend": "React",
+    "database": "PostgreSQL"
+  },
+  "database_schema": "Products (id, name, description, category_id, price, image_url), Categories (id, name, description), Users (id, username, password, email), Orders (id, user_id, order_date, total_amount, status), OrderItems (id, order_id, product_id, quantity, price), ShoppingCarts (id, user_id), CartItems (id, cart_id, product_id, quantity)",
+  "api_design": "RESTful API with endpoints for products, categories, users, orders, and shopping carts. Authentication via JWT. Payment integration endpoints for VNPay and Momo.",
+  "modules": [
+    "Product Management",
+    "Category Management",
+    "User Authentication",
+    "Order Management",
+    "Payment Integration",
+    "Shopping Cart",
+    "Admin Dashboard"
+  ]
+}
