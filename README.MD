@@ -221,9 +221,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Docker** for containerization made simple
 
 ## 🌟 Star History
+## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=doanngocthanh/AutoGen&type=Date)](https://www.star-history.com/#doanngocthanh/AutoGen&Date)
----
+[![Star History Chart](https://api.star-history.com/svg?repos=doanngocthanh/AutoGen&type=Timeline)](https://www.star-history.com/#doanngocthanh/AutoGen&Timeline)
 
 <div align="center">
 
